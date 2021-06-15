@@ -29,11 +29,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Post', new_post_path ,class: "btn btn-info btn-sm text-white"%>
-<% if user_signed_in? %>
-<%= button_to "logout", destroy_user_session_path, method: :delete  %>
-<% else %>
-<%= link_to 'Sign Up',new_user_registration_path , class: "btn btn-success btn-sm text-white"%>
-<%= link_to 'Sign In',new_user_session_path, class: "btn btn-secondary btn-sm text-white"%>
-<%end%>
