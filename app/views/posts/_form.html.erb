@@ -11,26 +11,28 @@
 </div>
 <% end %>
 
-<div class="field">
+<!-- <div class="field">
   <%= form.label :title %>
   <%= form.text_field :title %>
-</div>
-
-<div class="field">
-  <%= form.label :body %>
-  <%= form.text_area :body %>
-</div>
-
-<!-- <div class="field">
-    <%= form.label :like %>
-    <%= form.number_field :like %>
-  </div>-->
-
-<!-- <div class="field">
-  <%= form.text_field current_user.email %>
 </div> -->
+<div class="field d-flex flex-column align-items-center justify-content-start">
+  <div style="width:100%">
+    <%= form.label :title %>
+  </div>
+  <div style="width:100%">
+    <%= form.text_field :title %>
+  </div>
+</div>
+<div class="field d-flex flex-column align-items-center justify-content-start">
+  <div style="width:100%">
+    <%= form.label :body %>
+  </div>
+  <div style="width:100%; ">
+    <%= form.text_area :body,style:"width:100%;" %>
+  </div>
+</div>
 
-<div class="actions">
-  <%= form.submit %>
+<div class="actions d-flex justify-content-center">
+  <%= form.submit "Log in" ,class: "btn btn-secondary",style:"width:100%;" %>
 </div>
 <% end %>
