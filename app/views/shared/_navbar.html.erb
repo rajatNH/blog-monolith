@@ -6,7 +6,7 @@
 
                 <% if user_signed_in? %>
                 <li class="nav-item">
-                    <%= button_to 'New Post', new_post_path ,class: "btn btn-primary btn-sm text-white nav-link mx-2"%>
+                    <%= button_to 'New Post', new_post_path, method: "get",class: "btn btn-primary btn-sm text-white nav-link mx-2"%>
                 </li>
                 <li class="nav-item">
                     <%= button_to "logout", destroy_user_session_path, method: :delete ,class:'nav-link btn-danger text-white btn-sm mx-2' %>

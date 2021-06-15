@@ -1,24 +1,44 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |type, msg| %>
+<div class="alert alert-info">
+  <%= msg %>
+</div>
+<% end %>
+<!-- Page Header-->
+<header class="masthead">
+  <div class=" container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-heading">
+          <h1><%= @post.title %></h1>
+          <span class="meta">
+            Posted by
+            <span><%=@post.user_id%></span>
+            on <span><%=@post.created_at.to_date%></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<!-- Post Content-->
+<article class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <p><%=@post.body%></p>
+    </div>
+  </div>
+</article>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
 
-<p>
-  <strong>Like:</strong>
-  <%= @post.like %>
-</p>
+<%= @post.like %>
+<% if user_signed_in? %>
+<tr>
+  <td><%= link_to 'Edit', edit_post_path(@post) %></td>
+  <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% else %>
+<span></span>
+<% end %>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<!-- <%= link_to 'Back', posts_path %> -->

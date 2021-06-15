@@ -1,31 +1,54 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |type, msg| %>
+<div class="alert alert-info">
+  <%= msg %>
+</div>
+<% end %>
+<!-- Page Header-->
+<header class="masthead" style="">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Welcome to Blog</h1>
+          <span class="subheading">A Blog Theme by Rajat Agarwal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
 
-<h1>Posts</h1>
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <% @posts.each do |post| %>
+      <%= link_to post,class: "no-underline" do%>
+      <div class="post-preview">
+        <h2 class="post-title"><%= post.title%></h2>
+        <h3 class="post-subtitle" style="display:inline-block;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 30ch;">
+          <%= post.body%>
+        </h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Like</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.body %></td>
-      <td><%= post.like %></td>
-      <td><%= post.user_id %></td>
-      <td><%= link_to 'Show', post %></td>
-      <td><%= link_to 'Edit', edit_post_path(post) %></td>
-      <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+        <p class="post-meta">
+          Posted by
+          <span>
+            <%=User.find_by(id:post.user_id).email%>
+          </span>
+          on
+          <span>
+            <%=post.created_at.to_date%>
+          </span>
+        </p>
+      </div>
+      <% end %>
+      <hr class="my-4" />
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <br>
