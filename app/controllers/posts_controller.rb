@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[show index]
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show]
 
   # GET /posts or /posts.json
   def index
@@ -12,18 +12,17 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @user = User.find_by(email: current_user.email)
-    @post = @user.posts.new
+    @post = current_user.posts.new
   end
 
   # GET /posts/1/edit
-  def edit; end
+  def edit
+    @post = current_user.posts.find(params[:id])
+  end
 
   # POST /posts or /posts.json
   def create
-    @user = User.find_by(id: current_user.id)
-    @post = @user.posts.new(post_params)
-
+    @post = current_user.posts.new(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -37,6 +36,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    @post = current_user.posts.find(params[:id])
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -50,6 +50,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    @post = current_user.posts.find(params[:id])
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
