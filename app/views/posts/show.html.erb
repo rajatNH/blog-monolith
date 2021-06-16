@@ -7,7 +7,7 @@
           <h1><%= @post.title %></h1>
           <span class="meta">
             Posted by
-            <span><%=@post.user_id%></span>
+            <span><%=User.find_by(id:@post.user_id).email%></span>
             on <span><%=@post.created_at.to_date%></span>
           </span>
         </div>
@@ -26,7 +26,7 @@
         <%= @post.like %>
         <% if user_signed_in? %>
         <div class="d-flex flex-row justify-content-start">
-          <%= button_to 'Edit', edit_post_path(@post) ,class:"btn btn-outline-success btn-sm mr-2" %>
+          <%= button_to 'Edit', edit_post_path(@post),method: :get ,class:"btn btn-outline-success btn-sm mr-2" %>
           <%= button_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-outline-danger btn-sm mx-2" %>
         </div>
       </div>
