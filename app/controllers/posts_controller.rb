@@ -22,8 +22,6 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @user = User.find_by(id: current_user.id)
-    puts @user.email
-    puts post_params
     @post = @user.posts.new(post_params)
 
     respond_to do |format|
